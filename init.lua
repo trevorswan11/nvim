@@ -1,3 +1,6 @@
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Nvim Tree Key Mappings
 local function map(mode, lhs, rhs, opts)
   opts = opts or {}
@@ -14,7 +17,6 @@ vim.opt.shiftwidth = 4
 vim.opt.smarttab = true
 vim.opt.softtabstop = 4
 vim.opt.mouse = "a"
-vim.opt.clipboard:append("unnamedplus")
 vim.opt.autochdir = true
 vim.opt.expandtab = true
 
@@ -83,6 +85,7 @@ require('packer').startup(function(use)
 
   -- File explorer
   use 'kyazdani42/nvim-tree.lua'
+  use 'nvim-tree/nvim-web-devicons'
 
   -- Auto pairs
   use 'windwp/nvim-autopairs'
@@ -220,6 +223,19 @@ require("nvim-tree").setup {
           warning = "🐌",
           error = "🪲",
       }
+  },
+
+  -- File type --
+  renderer = {
+    highlight_opened_files = "name", -- Optional: Highlights the name of the opened files
+    icons = {
+      show = {
+        file = true, -- Show file icons
+        folder = true, -- Show folder icons
+        folder_arrow = true, -- Show arrows for open/close folder
+        git = true, -- Show git icons (if using git integration)
+      },
+    },
   },
 
   -- View options
