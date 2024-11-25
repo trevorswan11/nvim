@@ -60,9 +60,6 @@ vim.api.nvim_set_keymap('n', '<Leader><Tab>', ':bnext<CR>', { noremap = true, si
 vim.api.nvim_set_keymap('n', '<Leader><S-Tab>', ':bprev<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>x', ':bd<CR>', { noremap = true, silent = true })
 
--- Color scheme change
-vim.cmd([[colorscheme catppuccin-mocha]])
-
 -- BEGIN PACKER --
 require('packer').startup(function(use)
   -- LSP and completion
