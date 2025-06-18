@@ -48,7 +48,6 @@ require('packer').startup(function(use)
   use 'hrsh7th/cmp-cmdline'
   use 'saadparwaiz1/cmp_luasnip'
   use 'L3MON4D3/LuaSnip'
-  use 'jose-elias-alvarez/null-ls.nvim'
 
   -- Syntax highlighting and code manipulation
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
@@ -68,8 +67,12 @@ require('packer').startup(function(use)
   use 'akinsho/bufferline.nvim'
   use 'moll/vim-bbye'
 
-  use 'vim-airline/vim-airline'
-  use 'vim-airline/vim-airline-themes'
+  use {
+      'nvim-lualine/lualine.nvim',
+      requires = { 'nvim-tree/nvim-web-devicons' }
+  }
+  -- use 'vim-airline/vim-airline'
+  -- use 'vim-airline/vim-airline-themes'
   use 'ryanoasis/vim-devicons'
   use 'terrortylor/nvim-comment'
   use 'tpope/vim-surround'
@@ -77,14 +80,14 @@ require('packer').startup(function(use)
   use ({ 'projekt0n/github-nvim-theme' })
 end)
 
--- Airline Config
-vim.g['airline_section_x'] = ''
-vim.g['airline_section_y'] = ''
-vim.g['airline_section_z'] = '%p%%'
-vim.g.airline_powerline_fonts = 1
-vim.g.airline_theme = 'atomic'
-vim.g.airline_extensions_whitespace_enabled = 0
-vim.g.airline_symbols = { trailing = '' }
+-- Lualine Config
+require('lualine').setup {
+  options = {
+    theme = 'auto',  -- or 'auto', 'gruvbox', etc.
+    section_separators = '',
+    component_separators = '',
+  },
+}
 
 -- lspconfig
 local lspconfig = require('lspconfig')
@@ -243,16 +246,6 @@ require("nvim-tree").setup {
 -- Auto Pairs setup
 require('nvim-autopairs').setup{}
 
--- null-ls
-local null_ls = require('null-ls')
-null_ls.setup {
-    sources = {
-        null_ls.builtins.formatting.prettier.with {
-            extra_args = { "--single-quote", "--tab-width", "4", "--use-tabs", "false" }
-        },
-    },
-}
-
 -- bufferline
 require("bufferline").setup{
     options = {
@@ -280,3 +273,8 @@ require("bufferline").setup{
         separator_style = "thin",
     }
 }
+
+-- Temporary Fixes for Warnings
+vim.tbl_add_reverse_lookup = function(tbl)
+  return tbl  -- No-op fallback to avoid warning
+end
