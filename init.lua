@@ -90,30 +90,14 @@ require('lualine').setup {
 }
 
 -- lspconfig
-local lspconfig = require('lspconfig')
-lspconfig.pyright.setup{}
-lspconfig.jdtls.setup{}
-lspconfig.clangd.setup{}
-lspconfig.gopls.setup{}
-lspconfig.ts_ls.setup{}
-require'lspconfig'.bashls.setup{
-    cmd = { "bash-language-server", "start" },
-    filetypes = { "sh", "bash" },
-    root_dir = function(fname)
-        return require'lspconfig'.util.root_pattern('.git')(fname) or
-               require'lspconfig'.util.path.dirname(fname)
-    end,
-    settings = {
-        bash = {
-            shellcheck = {
-                enable = true,  -- Enable ShellCheck diagnostics
-            },
-            bashIde = {
-                enable = true,  -- Enable bash IDE features
-            },
-        },
-    },
-}
+local lsp = vim.lsp
+
+lsp.enable("pyright")
+lsp.enable("jdtls")
+lsp.enable("clangd")
+lsp.enable("gopls")
+lsp.enable("ts_ls")
+lsp.enable("bashls")
 
 -- completion
 local cmp = require('cmp')
