@@ -98,6 +98,7 @@ lsp.enable("clangd")
 lsp.enable("gopls")
 lsp.enable("ts_ls")
 lsp.enable("bashls")
+lsp.enable("rust_analyzer")
 
 -- completion
 local cmp = require('cmp')
